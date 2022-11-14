@@ -1,0 +1,261 @@
+---
+title: "Midterm"
+author: "Carolee Nguyen"
+date: '2022-10-11'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#read data
+imagedata = read.csv("/Users/Carol/Downloads/train.csv")
+
+digits = imagedata[1,]
+
+#2) Separate the data by digits, and calculate average value of each pixel
+
+num0 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num1 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num2 = matrix(as.numeric(colMeans(train,2:785])),nrow=28, ncol=28)
+num3 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num4 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num5 = matrix(as.numeric(colMeans(train,2:785])),nrow=28, ncol=28)
+num6 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num7 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+num8 = matrix(as.numeric(colMeans(train[,2:785])),nrow=28, ncol=28)
+
+#3) Find which columns have the most variance and which have the least.
+
+
+#Over column 
+variancewhole = var(train[,2:785])
+
+#Over whole datasaet
+for(i in nrwow:(train)){
+  variance = var(train[,i])
+  print(variance)
+}
+
+
+#I am not sure how to answer C and D
+
+#For each digit
+var(num0)
+var(num1)
+var(num2)
+var(num3)
+var(num4)
+var(num5)
+var(num6)
+var(num7)
+var(num8)
+var(num9)
+
+#Create an a 28x28 image
+image1 = digits
+as.numeric(imgage1)
+image1 = matrix(as.numeric(imagedata[1,2:785]),nrow=28, ncol=28)
+heatmap(image1, col = grey.colors(256, start = 0, end = 1))
+
+
+install.packages("raster")
+library(raster)
+upload = readPNG("/Users/Carol/Downloads/image.png")
+
+
+#I was not able to get this part
+picture <- matrix(stuff, nrow=28, ncol=28, byrow=TRUE)
+heatmap(picture, Rowv = NA, Colv = NA, col = gray.colors(256, start = 0, end = 1))
+
+
+
+#DATASET 2
+
+#read data
+data = read.csv("C:/Users/Carol/Downloads/Mnemiopsis_count_data.csv")
+
+#1) What are the top 5 genes with the highest average expression (across experiments) in the set? what is their function ?
+
+#Separate the count data from the gene names
+count = data[2:9]
+
+#Convert the count data to a dataframe
+as.data.frame(count)
+is.data.frame(count)
+
+##Calculate the mean for each row
+means = apply(count, 1, mean)
+
+#Create a new dataframe that has every gene name and its mean
+new <- data.frame(genename=1:16548)
+
+new$genename = data[1]
+
+new$meanvalue = means
+
+as.data.frame(new)
+is.data.frame(new)
+
+#Sort the mean from greatest to lowest mean value
+df <- new[order(new$meanvalue, decreasing = TRUE),]
+
+#View the top 5 genes with the greatest mean
+head(df, 5)
+
+#ML20395a 122241.38 
+#ML26358a  64737.00 
+#ML46651a  62309.25 
+#ML020045a  54829.00  
+#ML00017a  554044.12  
+
+#2) Are the top 5 genes different if they are done on a per column basis ?
+
+#Separate oral and aboral data
+aboral = data[2:5]
+oral = data[6:9]
+
+aboralmeans = apply(aboral, 1, mean)
+oralmeans = apply(oral, 1, mean)
+
+#Aboral
+aboraldata <- data.frame(genename=1:16548)
+
+aboraldata$genename = data[1]
+
+aboraldata$meanvalue = aboralmeans
+
+as.data.frame(aboraldata)
+is.data.frame(aboraldata)
+
+df1 <- aboraldata[order(aboraldata$meanvalue, decreasing = TRUE),]
+
+head(df1, 5)
+
+#ML20395a 125348.50
+#ML46651a  97676.00
+#ML01482a  79597.25
+#ML26358a  77876.00
+#ML034334a  64857.25
+
+
+#Oral
+
+oraldata <- data.frame(genename=1:16548)
+
+oraldata$genename = data[1]
+
+oraldata$meanvalue = oralmeans
+
+as.data.frame(oraldata)
+is.data.frame(oraldata)
+
+df2 <- oraldata[order(oraldata$meanvalue, decreasing = TRUE),]
+
+head(df2, 5)
+
+#ML20395a 119134.25
+#ML26358a  51598.00
+#ML020045a  50998.50
+#ML00017a  50607.50
+#ML04011a  50153.75
+
+
+#3) Calculate mean and standard deviation of each column, If the mean is different, then scale the columns so that they all have the same mean for the subsequent questions
+
+meancol = colMeans(count)
+print(meancol)
+
+sd = colSds(as.matrix(count[sapply(count, is.numeric)]))
+print(sd)
+
+df3 <- data.frame(Mean=1:8)
+df3$StandardDev = c(1:8)
+df3$StandardDev = sd
+df3$Mean[c(1:8)] = meancol 
+
+rownames(df3) <- colnames(count)
+
+print(df3)
+
+```
+x = df3[1,1]
+print(x)
+
+
+#Scaling factors
+value2 = x/(df3[2,1])
+value3 = x/df3[3,1]
+value4 = x/df3[4,1]
+value5 = x/df3[5,1]
+value6 = x/df3[6,1]
+value7 = x/df3[7,1]
+value8 = x/df3[8,1]
+```
+
+```
+#Scaled values
+new2 = value2*(df3[2,])
+new3 = value3*(df3[3,])
+new4 = value4*(df3[4,])
+new5 = value5*(df3[5,])
+new6 = value6*(df3[6,])
+new7 = value7*(df3[7,])
+new8 = value8*(df3[8,])
+
+```
+df4 = data.frame(Mean=1:8)
+df4$StandardDev  = c(1:8)
+df4[1,] = df3[1,]
+df4[2,] = new2
+df4[3,] = new3
+df4[4,] = new4
+df4[5,] = new5
+df4[6,] = new6
+df4[7,] = new7
+df4[8,] = new8
+
+
+rownames(df4) = colnames(count)
+
+print(df4)
+
+as.data.frame(df4)
+is.data.frame(df4)
+
+newdf4 = t(df4)
+
+#3) Use correlations between columns to find the samples that are closely related. Is this concordant with the column labels ?
+cor(count)
+cor(t(count))
+
+Yes, they are concordant with the column labels
+
+#ttest
+
+for (row in 1:nrow(stock)) {
+t.test(aboralmeans, oralmeans)$p.value
+
+5) If you were forced to divide the genes in each column into high, medium and
+low count genes, how would you do this based on the data that you have ?
+
+I am not sure, either calculate the means for each row and define a threshold for high, medium, low. We can do this by performing differntial gene analysis using the DeSeq2 package, which extracts the log2fold change value for each gene via aboral/oral. We can define high count(highly expressed genes) as having a postive log2fold change, mdeium count genes as having a log2fold change close to 0, and low count genes as having a log2fold change close to -1. Use a for loop that adds each gene that satisfies those conditions into an empty list.
+
+6) make a list of the top 5 genes with most variability and top 5 genes with
+least variability (exclude genes that have low expression values)
+
+#I think we use Ryans method for this
+rowcor <- cor(count[,-1],)
+
+7) Using the labels of columns provided, find the top variable genes between
+the two groups using a t-test list the 5 most up regulated and
+  5 most  down regulated genes. What happens if you rank by p-value of the t-test ?
+  would you exclude some of these  genes for having low expression ?
+
+for(i in 1:nrow(data)){
+  testt = t.test(data[,2:5], data[,6:9])
+  pvalue = testt$p.value
+  print(pvalue)
+}
+
+
